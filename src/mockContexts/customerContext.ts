@@ -1,0 +1,21 @@
+export const mockCustomerContext = {
+  id: 56741,
+  createdOn: 1635422061000,
+  lastModifiedOn: 1668165077000,
+  createdBy: "system",
+  version: 2,
+  tenant: "CUREFIT",
+  email: "kishan.thesiya@curefit.com",
+  phone: "+91-96623531453",
+  name: "Kishan Mohanbhai Thesiya",
+  firstName: "Kishan Mohanbhai",
+  lastName: "Thesiya",
+  isActive: true,
+  empId: "CF570",
+  namespace: "gymfit",
+  searchUserById: {
+    userId: 56741,
+  },
+  searchUserByPhone: {},
+  userDetailsLoading: true,
+};
