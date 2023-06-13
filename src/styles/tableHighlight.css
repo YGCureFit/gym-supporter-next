@@ -1,0 +1,35 @@
+.table-highlight::after{
+    content:'\25BA';
+    position: absolute;
+    font-size: 38px;
+    color: white;
+    left: 56%;
+    left: 98%;
+}
+.w-95 {
+    width: 95%;
+}
+
+.hexagon {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    background: linear-gradient(145.31deg, #F8BA00 9.03%, #EF5FA7 90.5%);
+    top: 30%;
+    z-index:1;
+  }
+  .hexagon:before, .double:after {
+    position: absolute;
+    content: '';
+  }
+  .hexagon:before {
+    top: 4px;  
+    left: 4px; 
+    height: calc(100% - 8px);  
+    width: calc(100% - 8px);  
+    background: #000;
+  }
+  .hexagon, .hexagon:before, .double:after {
+    -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }

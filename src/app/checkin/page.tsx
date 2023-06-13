@@ -1,5 +1,7 @@
 "use client";
 import React, { forwardRef, ReactNode, useEffect, useState } from "react";
+import { GFCheckIn } from "@/mockData/MockModels";
+import "../../styles/output.css";
 import {
   QueryClient,
   QueryClientProvider,
@@ -7,6 +9,7 @@ import {
 } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaCalendar } from "react-icons/fa";
@@ -123,11 +126,11 @@ export default function Checkin() {
     return mergedDateTime.valueOf();
   };
   const {
-    unassignedNewMembers = [],
-    unassignedTrials = [],
-    assignedTrials = [],
-    assignedNewMembers = [],
-    existingMembers = [],
+    unassignedNewMembers = GFCheckIn,
+    unassignedTrials = GFCheckIn,
+    assignedTrials = GFCheckIn,
+    assignedNewMembers = GFCheckIn,
+    existingMembers = GFCheckIn,
     isLoading = false,
     refetchCheckins = () => {},
     unassignedComplementaryMembers = [],
@@ -153,53 +156,53 @@ export default function Checkin() {
   const getUserPhoneNumberFunction = (userId: any): void => {
     console.log("userid detail ", userId);
     setSelectedUserIdForCall(userId);
-    getUserPhoneNumber({ userId, centerId: selectedCenter?.id });
+    // getUserPhoneNumber({ userId, centerId: selectedCenter?.id });
   };
 
-  const { mutate: getUserPhoneNumber } = useMutation(
-    apiConfigs.getUserPhoneNumberConfig().queryFn,
-    {
-      onSuccess: (data: any) => {
-        console.log("user Phone number is ", data);
-        if (data?.isPIIAccessibleGym) {
-          setUserPhoneNumber(data?.phone);
-          setShowPhoneNumberModalVisible(true);
-        } else {
-          setTrainerUserCallModalVisible(true);
-          setUserNameCall(data?.userName);
-          setCmPhone(data?.cmPhone);
-        }
-      },
-      onError: (...args: any) => {
-        toastError(
-          args?.response?.data?.message ||
-            args?.response?.message ||
-            args?.message
-        );
-      },
-    }
-  );
+  // const { mutate: getUserPhoneNumber } = useMutation(
+  //   apiConfigs.getUserPhoneNumberConfig().queryFn,
+  //   {
+  //     onSuccess: (data: any) => {
+  //       console.log("user Phone number is ", data);
+  //       if (data?.isPIIAccessibleGym) {
+  //         setUserPhoneNumber(data?.phone);
+  //         setShowPhoneNumberModalVisible(true);
+  //       } else {
+  //         setTrainerUserCallModalVisible(true);
+  //         setUserNameCall(data?.userName);
+  //         setCmPhone(data?.cmPhone);
+  //       }
+  //     },
+  //     onError: (...args: any) => {
+  //       toastError(
+  //         args?.response?.data?.message ||
+  //           args?.response?.message ||
+  //           args?.message
+  //       );
+  //     },
+  //   }
+  // );
 
-  const { mutate: callUserIVR } = useMutation(
-    apiConfigs.callUserIVRConfig().queryFn,
-    {
-      onSuccess: (data: any) => {
-        console.log("user Phone number is ", data);
-        toastSuccess(data?.sent ? `you will recieve a call` : `Call Failed`);
-        setTrainerUserCallModalVisible(false);
-      },
-      onError: (...args: any) => {
-        toastError(
-          args?.response?.data?.message ||
-            args?.response?.message ||
-            args?.message
-        );
-        setTrainerUserCallModalVisible(false);
-      },
-    }
-  );
+  // const { mutate: callUserIVR } = useMutation(
+  //   apiConfigs.callUserIVRConfig().queryFn,
+  //   {
+  //     onSuccess: (data: any) => {
+  //       console.log("user Phone number is ", data);
+  //       toastSuccess(data?.sent ? `you will recieve a call` : `Call Failed`);
+  //       setTrainerUserCallModalVisible(false);
+  //     },
+  //     onError: (...args: any) => {
+  //       toastError(
+  //         args?.response?.data?.message ||
+  //           args?.response?.message ||
+  //           args?.message
+  //       );
+  //       setTrainerUserCallModalVisible(false);
+  //     },
+  //   }
+  // );
 
-  const history = useNavigate();
+  // const history = useNavigate();
 
   useEffect(() => {
     if (checkinState === GymfitCheckInState.VALIDATED) {
@@ -240,56 +243,58 @@ export default function Checkin() {
 
     return (
       // <QueryClientProvider client={queryClient}>
-      <UserProfileCard
-        name={`${firstName} ${lastName}`}
-        imageUrl={profilePictureUrl}
-        key={`${id} ${startTime}`}
-        time={validatedAt}
-        leadType={leadType}
-        getUserPhoneNumber={() => getUserPhoneNumberFunction(id)}
-        onClick={() => {
-          searchUserById;
-          history({
-            pathname: "/user",
-            search: "Checkins=true",
-          });
-        }}
-        id={Number(id)}
-        // isCallEnabledCenter={isCallEnabledCenter}
-      >
-        <CheckinMeta checkinDetails={checkinItem} />
-        {withTrainerAssignment ? (
-          <div
-            style={{
-              width: "100%",
-            }}
-          >
+      <Router>
+        <UserProfileCard
+          name={`${firstName} ${lastName}`}
+          imageUrl={profilePictureUrl}
+          key={`${id} ${startTime}`}
+          time={validatedAt}
+          leadType={leadType}
+          getUserPhoneNumber={() => getUserPhoneNumberFunction(id)}
+          onClick={() => {
+            // searchUserById;
+            // history({
+            //   pathname: "/user",
+            //   search: "Checkins=true",
+            // });
+          }}
+          id={Number(id)}
+          // isCallEnabledCenter={isCallEnabledCenter}
+        >
+          <CheckinMeta checkinDetails={checkinItem} />
+          {withTrainerAssignment ? (
             <div
-              onClick={(event) => {
-                setSelectedCheckIn(checkinItem);
-                toggleTrainerModal();
-                event.stopPropagation();
-              }}
               style={{
-                backgroundColor: "rgba(255, 255, 255, 0.1)",
-                padding: "7px 10px 7px 10px",
-                fontFamily: "Inter",
-                fontStyle: "normal",
-                fontWeight: 600,
-                fontSize: "12px",
-                lineHeight: "16px",
-                textAlign: "center",
-                letterSpacing: "0.5px",
-                textTransform: "uppercase",
-                color: "white",
-                borderRadius: 7,
+                width: "100%",
               }}
             >
-              Assign Trainer
+              <div
+                onClick={(event) => {
+                  setSelectedCheckIn(checkinItem);
+                  toggleTrainerModal();
+                  event.stopPropagation();
+                }}
+                style={{
+                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  padding: "7px 10px 7px 10px",
+                  fontFamily: "Inter",
+                  fontStyle: "normal",
+                  fontWeight: 600,
+                  fontSize: "12px",
+                  lineHeight: "16px",
+                  textAlign: "center",
+                  letterSpacing: "0.5px",
+                  textTransform: "uppercase",
+                  color: "white",
+                  borderRadius: 7,
+                }}
+              >
+                Assign Trainer
+              </div>
             </div>
-          </div>
-        ) : null}
-      </UserProfileCard>
+          ) : null}
+        </UserProfileCard>
+      </Router>
       // </QueryClientProvider>
     );
   };
@@ -436,14 +441,19 @@ export default function Checkin() {
   const unassignedNewMembersCount = unassignedNewMembers.length || 0;
   const unassignedComplementaryMembersCount =
     unassignedComplementaryMembers.length || 0;
+  // const unassignedTrialsCount = 3;
+  // const unassignedNewMembersCount = 2;
+  // const unassignedComplementaryMembersCount = 1;
 
+  // console.log(detectMob ? "true" : "false");
   return (
     <QueryClientProvider client={queryClient}>
       <PageContainer>
         <Header title={title}>
-          {!detectMob ? ( //detectMob() to detectMob
+          {/* {!detectMob ? ( //detectMob() to detectMob
             <SearchBar placeHolder="Search member by mobile number or user id" />
-          ) : null}
+          ) : null} */}
+          <SearchBar placeHolder="Search member by mobile number or user id" />
         </Header>
         <div className={clsx("m-4")}>{renderDateTimeSelector()}</div>
         <Nullable
@@ -600,11 +610,12 @@ export default function Checkin() {
             onClose={() => setTrainerUserCallModalVisible(false)}
             cmPhone={cmPhoneNumber}
             userName={userNameForCall}
-            callUserFunction={() =>
-              callUserIVR({
-                userId: selectedUserIdForCall,
-                centerId: selectedCenter?.id,
-              })
+            callUserFunction={
+              () => {}
+              // callUserIVR({
+              //   userId: selectedUserIdForCall,
+              //   centerId: selectedCenter?.id,
+              // })
             }
           />
         ) : null}

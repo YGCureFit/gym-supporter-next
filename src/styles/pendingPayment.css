@@ -1,0 +1,22 @@
+.payment-confirmation-modal {
+    margin-top: -24px;
+}
+
+.payment-confirmation-modal-instruction {
+    width: 300px;
+}
+
+.payment-failed-modal-reason {
+    width: 600px;
+    margin-top: -24px;
+}
+
+.purchase-successfull-modal-detail {
+    width: 500px;
+}
+
+.purchase-wait-modal {
+    width: 700px;
+    height: 250px;
+}
+

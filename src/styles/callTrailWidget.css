@@ -1,0 +1,58 @@
+.timeline-icon-wrapper {
+  background: black;
+  box-shadow: none;
+  border: 2px solid white;
+  z-index: 3;
+}
+
+.success-icon-wrapper {
+  border: 2px solid lightgreen;
+  background: rgb(203, 255, 223);
+}
+
+.connected-icon-wrapper {
+  border: 2px solid lightgreen;
+}
+
+.cancelled-icon-wrapper {
+  border: 2px solid red;
+}
+
+.failed-icon-wrapper {
+  border: 2px solid red;
+}
+
+.timeline-icon {
+  left: 7px;
+  top: 7px;
+  position: absolute;
+  font-size: 14px;
+  width: 22px;
+}
+
+.vertical-timeline::before {
+  background: none;
+  left: 119px;
+  border: 2px dashed rgba(58, 58, 58,1);
+  width: 2px;
+}
+
+.vertical-timeline-element {
+  margin-left: 100px;
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+
+.vertical-timeline-element-date {
+  position: absolute;
+  left: -12em;
+  top: -0.5em;
+  width: 100px;
+}
+
+.timeline-card-separator {
+  color: rgb(171, 171, 171);
+  font-size: 8px;
+  padding: 0 4px;
+}
+

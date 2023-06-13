@@ -1,0 +1,31 @@
+.decreased-performance {
+  background: rgba(255, 89, 66, 0.1);
+  border: 1px solid #ff5942;
+  border-radius: 10px;
+}
+
+.current-level-label {
+  background: #f7c744;
+  border: 1px solid #3a3a3a;
+  top: -31px;
+}
+
+.previous-level-label {
+  background: #3a3a3a;
+  border: 1px solid #616161;
+  border-radius: 100px;
+  top: 40px;
+  z-index: 9999;
+}
+
+.bronze-position {
+  left: 35%;
+}
+
+.silver-position {
+  left: 57%;
+}
+
+.platinum-position {
+  left: 78%;
+}

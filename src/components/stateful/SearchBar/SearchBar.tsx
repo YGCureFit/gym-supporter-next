@@ -18,7 +18,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   placeHolder,
   searchInPlace,
 }) => {
-  const history = useNavigate();
+  // const history = useNavigate();
   const { userDetailsLoading, searchUserByPhone, searchUserById } =
     mockCustomerContext;
 
