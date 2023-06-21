@@ -18,7 +18,7 @@ import { SkeletonLoader } from "../../components/common/SkeletonLoader/SkeletonL
 // import { useCenterContext } from "../components/contextProviders/centerContext";
 import { mockCenterContext } from "@/mockContexts/centerContext";
 import { GymfitCheckIn, GymfitCheckInState } from "@curefit/gymfit-common";
-// import { AppUtils } from "../utils/appUtils";
+import { AppUtils } from "../../utils/appUtils";
 import { AssignTrainerModal } from "../../modals/AssignTrainerModal/AssignTrainerModal";
 import { GridItem } from "../../components/common/GridItem/GridItem";
 import { Nullable } from "../../components/common/Nullable/Nullable";
@@ -34,7 +34,7 @@ import { WidgetCard } from "../../components/common/WidgetCard/WidgetCard";
 import { UserProfileCard } from "../../components/common/UserProfileCard/UserProfileCard";
 import { CheckinMeta } from "../../components/common/CheckinMeta/CheckinMeta";
 import { Scrollable } from "../../components/common/Scrollable/Scrollable";
-// import { useCheckins } from "../hooks/checkins";
+// import { useCheckins } from "../../hooks/checkins";
 // import { useCustomerContext } from "../../components/contextProviders/customerContext";
 import { mockCustomerContext } from "../../mockContexts/customerContext";
 import { useMutation } from "react-query";
@@ -138,16 +138,29 @@ export default function Checkin() {
     existingComplementaryMembers = [],
   } = {};
 
-  // = useCheckins({
+  // const {
+  //   unassignedNewMembers,
+  //   unassignedTrials,
+  //   assignedTrials,
+  //   assignedNewMembers,
+  //   existingMembers,
+  //   isLoading = false,
+  //   refetchCheckins,
+  //   unassignedComplementaryMembers,
+  //   assignedComplementaryMembers,
+  //   existingComplementaryMembers,
+  // } = useCheckins({
   //   filters: {
   //     centerId: Number(selectedCenter?.id) || 0,
   //     includeUserDetails: true,
   //     pageNumber: 1,
   //     pageSize: 10000,
   //     startTimeFrom: startTime
-  //       ? getMergedTimestamp(startDate, startTime)
+  //       ? AppUtils.getMergedTimestamp(startDate, startTime)
   //       : null,
-  //     startTimeTo: endTime ? getMergedTimestamp(startDate, endTime) : null,
+  //     startTimeTo: endTime
+  //       ? AppUtils.getMergedTimestamp(startDate, endTime)
+  //       : null,
   //     states: [checkinState],
   //   },
   //   checkinState,
@@ -163,11 +176,7 @@ export default function Checkin() {
   //   apiConfigs.getUserPhoneNumberConfig().queryFn,
   //   {
   //     onSuccess: (data: any) => {
-  //       console.log("user Phone number is ", data);
-  //       if (data?.isPIIAccessibleGym) {
-  //         setUserPhoneNumber(data?.phone);
-  //         setShowPhoneNumberModalVisible(true);
-  //       } else {
+  //       ?? } else {
   //         setTrainerUserCallModalVisible(true);
   //         setUserNameCall(data?.userName);
   //         setCmPhone(data?.cmPhone);

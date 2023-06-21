@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { motion } from "framer-motion";
 import { FaSearch } from "react-icons/fa";
 // import { useCustomerContext } from "../../contextProviders/customerContext";
-import { mockCustomerContext } from "@/mockContexts/customerContext";
+import { mockCustomerContext } from "../../../mockContexts/customerContext";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "../../common/Spinner/Spinner";
 

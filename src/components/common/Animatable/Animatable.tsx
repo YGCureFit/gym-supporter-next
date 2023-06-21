@@ -1,3 +1,4 @@
+"use client";
 import React, { ReactNode, useRef } from "react";
 import { motion } from "framer-motion";
 import { ClassValue } from "clsx";
