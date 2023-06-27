@@ -1,0 +1,26 @@
+deployment:
+  labels:
+    billing: cult
+    sub-billing: gym-supporter-next
+  env:
+    - name: TZ
+      value: Asia/Kolkata
+    - name: ENVIRONMENT
+      value: PRODUCTION
+    - name: APP_ENV
+      value: ALPHA
+    - name: NODE_ENV
+      value: production
+  probePort: 3001
+istio:
+  external:
+    hosts:
+      - gymfit-next--partner.alpha.curefit.co
+service:
+  expose:
+    - 3001
+
+externalSecrets:
+  enabled: "true"
+  names:
+    - prod/cult/k8s-gym-supporter-next

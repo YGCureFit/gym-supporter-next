@@ -1,0 +1,26 @@
+deployment:
+  labels:
+    billing: cult
+    sub-billing: gym-supporter-next
+  env:
+    - name: TZ
+      value: Asia/Kolkata
+    - name: ENVIRONMENT
+      value: STAGE
+    - name: APP_ENV
+      value: STAGE
+    - name: NODE_ENV
+      value: stage
+      podAnnotations:
+      iam.amazonaws.com/role: arn:aws:iam::035243212545:role/k8s-gymfit-next-service-stage
+  probePort: 3001
+istio:
+  external:
+    hosts:
+      - gymfit-next-partner.stage.curefit.co
+service:
+  expose:
+    - 3001
+
+externalSecrets:
+  enabled: "true"

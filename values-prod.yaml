@@ -1,0 +1,61 @@
+deployment:
+  labels:
+    billing: cult
+    sub-billing: gym-supporter-next
+  env:
+    - name: TZ
+      value: Asia/Kolkata
+    - name: ENVIRONMENT
+      value: PRODUCTION
+    - name: APP_ENV
+      value: PRODUCTION
+    - name: NODE_ENV
+      value: production
+    - name: UV_THREADPOOL_SIZE
+      value: 128
+    - name: DATALAKE_API_KEY
+      value: 5ea75a9b3e6c4986912d0a56b9c0dd52
+    - name: DATALAKE_API_URL
+      value: https://dataplatform-webhook.curefit.co/production/partner-gym-web-portal-events
+
+  probePort: 3001
+istio:
+  external:
+    hosts:
+      - gymfit-next-partner.curefit.co
+      - cult-partner.curefit.com
+      - cult-partner.cure.fit
+service:
+  expose:
+    - 3001
+
+externalSecrets:
+  enabled: "true"
+
+scaling:
+  targetCPUUtilPercentage: 80
+  minReplicas: 2
+  maxReplicas: 5
+pager:
+  service-name: gym-supporter-next
+  provider: opsgenie
+
+bugtracker:
+  provider: rollbar
+  service-name: gym-supporter-next
+
+support:
+  slack-channel: gymfit-alerts
+  mailing-list: cult-pass-on-call@curefit.com
+
+apm:
+  provider: datadog
+  service-name: gym-supporter-next
+
+pod-id: cult-pass
+
+repository:
+  url: https://github.com/curefit/gym-supporter-next
+
+tags:
+  billing: cultpass

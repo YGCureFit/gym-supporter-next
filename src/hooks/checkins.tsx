@@ -46,7 +46,7 @@ export async function useCheckins({
   } = useQuery({
     ...apiConfigs.getPastCheckInConfig({
       ...filters,
-    }),
+    }), 
     refetchOnReconnect: true,
     refetchOnWindowFocus: true,
     refetchIntervalInBackground: true,
